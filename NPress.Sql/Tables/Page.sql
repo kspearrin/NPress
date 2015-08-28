@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Page]
+(
+    [Id] VARCHAR(30) NOT NULL PRIMARY KEY, 
+    [Title] NVARCHAR(255) NOT NULL, 
+    [Content] NVARCHAR(MAX) NOT NULL
+)

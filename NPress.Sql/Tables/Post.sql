@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[Post]
+(
+    [Id] VARCHAR(30) NOT NULL PRIMARY KEY, 
+    [UserId] VARCHAR(30) NOT NULL,
+    [Title] NVARCHAR(255) NOT NULL,
+    [Content] NVARCHAR(MAX) NOT NULL
+)
