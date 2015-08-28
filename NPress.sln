@@ -23,7 +23,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "NPress.Business.Test", "tes
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "NPress.Data.Test", "test\NPress.Data.Test\NPress.Data.Test.xproj", "{7B4949CC-AE28-4D53-A16B-80AA5ED8608D}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "NPress.Sql", "NPress.Sql\NPress.Sql.sqlproj", "{BB2198C9-FA02-4F7E-919F-7F502826E999}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "NPress.Sql", "src\NPress.Sql\NPress.Sql.sqlproj", "{BB2198C9-FA02-4F7E-919F-7F502826E999}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
