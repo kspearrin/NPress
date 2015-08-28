@@ -7,7 +7,7 @@
     "licenseUrl": "",
 
     "dependencies": {
-        "NPress.Business": ""
+        "Business": ""
     },
 
     "frameworks": {

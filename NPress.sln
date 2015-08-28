@@ -11,19 +11,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "NPress.Web", "src\NPress.Web\NPress.Web.xproj", "{076B6050-C7EE-46DF-BD1D-C98B543A9E97}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Web", "src\Web\Web.xproj", "{076B6050-C7EE-46DF-BD1D-C98B543A9E97}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "NPress.Business", "src\NPress.Business\NPress.Business.xproj", "{B266C458-EF9C-4CB8-93CF-95BE73E67C04}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Business", "src\Business\Business.xproj", "{B266C458-EF9C-4CB8-93CF-95BE73E67C04}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "NPress.Data", "src\NPress.Data\NPress.Data.xproj", "{6A3F151D-2E6C-4046-BF2E-9DFA6C09C1CB}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Data", "src\Data\Data.xproj", "{6A3F151D-2E6C-4046-BF2E-9DFA6C09C1CB}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Sql", "src\Sql\Sql.sqlproj", "{BB2198C9-FA02-4F7E-919F-7F502826E999}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FED3592D-D3FD-4DCA-917D-A6F534361258}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "NPress.Business.Test", "test\NPress.Business.Test\NPress.Business.Test.xproj", "{518F21AB-4F6A-4567-BE2C-B12E472AEA3F}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Business.Test", "test\Business.Test\Business.Test.xproj", "{518F21AB-4F6A-4567-BE2C-B12E472AEA3F}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "NPress.Data.Test", "test\NPress.Data.Test\NPress.Data.Test.xproj", "{7B4949CC-AE28-4D53-A16B-80AA5ED8608D}"
-EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "NPress.Sql", "src\NPress.Sql\NPress.Sql.sqlproj", "{BB2198C9-FA02-4F7E-919F-7F502826E999}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Data.Test", "test\Data.Test\Data.Test.xproj", "{7B4949CC-AE28-4D53-A16B-80AA5ED8608D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

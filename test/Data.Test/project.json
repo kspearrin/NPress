@@ -1,13 +1,19 @@
 ﻿{
     "version": "1.0.0-*",
-    "description": "NPress.Business Class Library",
+    "description": "NPress.Data.Test Class Library",
     "authors": [ "kyles" ],
     "tags": [ "" ],
     "projectUrl": "",
     "licenseUrl": "",
 
     "dependencies": {
-        "NPress.Data": ""
+        "Data": "",
+        "xunit": "2.1.0-*",
+        "xunit.runner.dnx": "2.1.0-*"
+    },
+
+    "commands": {
+        "test": "xunit.runner.dnx"
     },
 
     "frameworks": {

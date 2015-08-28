@@ -11,7 +11,7 @@ namespace NPress.Data.Test.Repositories.Sql
 {
     public class RepositoryTest
     {
-        private const string ConnectionString = "Data Source=(localdb)\\ProjectsV12;Initial Catalog=NPress.Sql;Integrated Security=True;Pooling=False;Connect Timeout=30";
+        private const string ConnectionString = "Data Source=(localdb)\\ProjectsV12;Initial Catalog=Sql;Integrated Security=True;Pooling=False;Connect Timeout=30";
 
         [Fact]
         public async Task Create_Success()
