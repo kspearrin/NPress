@@ -13,6 +13,7 @@ using Microsoft.Framework.Logging;
 using Microsoft.Framework.Logging.Console;
 using Microsoft.Framework.OptionsModel;
 using Microsoft.Framework.Runtime;
+using NPress.Business.Services;
 using NPress.Core;
 using NPress.Data.Repositories;
 
@@ -42,7 +43,12 @@ namespace NPress.Web
             services.AddSingleton(s => globalSettings);
 
             // DI
+
+            // repositories
             services.AddSingleton<IPostRepository>(s => new Data.Repositories.Sql.PostRepository(globalSettings));
+
+            // services
+            services.AddScoped<IPostService, PostService>();
 
             services.AddMvc();
         }

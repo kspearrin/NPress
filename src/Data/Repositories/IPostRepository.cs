@@ -6,6 +6,6 @@ namespace NPress.Data.Repositories
 {
     public interface IPostRepository : IRepository<Post>
     {
-        Task<IEnumerable<Post>> PageAsync(string cursor, bool sortAscending, int pageSize);
+        Task<IEnumerable<Post>> PageAsync(string cursor, bool cursorBefore, int pageSize);
     }
 }

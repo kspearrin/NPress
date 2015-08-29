@@ -4,7 +4,6 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
-using System.Text;
 using NPress.Core.Data;
 using NPress.Core;
 
@@ -20,12 +19,12 @@ namespace NPress.Data.Repositories.Sql
             : base(connectionString)
         { }
 
-        public async Task<IEnumerable<Post>> PageAsync(string cursor, bool sortAscending, int pageSize)
+        public async Task<IEnumerable<Post>> PageAsync(string cursor, bool beforeCursor, int pageSize)
         {
             var sql = $@"
                 SELECT * FROM [Post]
-                WHERE [Id] {(sortAscending ? "<" : ">")} @Cursor
-                ORDER BY [Id] {(sortAscending ? "ASC" : "DESC")}
+                WHERE @Cursor IS NULL OR [Id] {(beforeCursor ? "<" : ">")} @Cursor
+                ORDER BY [Id] {(beforeCursor ? "DESC" : "ASC")}
                 OFFSET 0 ROWS
                 FETCH NEXT @PageSize ROWS ONLY;";
 

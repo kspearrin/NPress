@@ -16,7 +16,7 @@ namespace NPress.Data.Test.Repositories.Sql
         [Fact]
         public async Task Create_Success()
         {
-            var repository = new Data.Repositories.Sql.Repository<Post>(ConnectionString);
+            var repository = new Data.Repositories.Sql.PostRepository(ConnectionString);
             var post = new Post
             {
                 Title = "Test title",
@@ -25,6 +25,7 @@ namespace NPress.Data.Test.Repositories.Sql
                 CreationDateTime = DateTime.UtcNow,
                 RevisionDateTime = DateTime.UtcNow
             };
+
             await repository.CreateAsync(post);
 
             Assert.NotNull(post.Id);
@@ -36,6 +37,13 @@ namespace NPress.Data.Test.Repositories.Sql
                 Assert.NotNull(testPost);
                 Assert.Equal(post.Id, testPost.Id);
             }
+        }
+
+        [Fact]
+        public async Task Page_CorrectOrder()
+        {
+            var repository = new Data.Repositories.Sql.PostRepository(ConnectionString);
+            var posts = await repository.PageAsync(null, false, 2);
         }
     }
 }

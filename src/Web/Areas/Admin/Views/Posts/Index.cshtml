@@ -5,5 +5,19 @@
 
 @foreach(var post in Model.Posts)
 {
-    <p>@post.Title</p>
+    <p>
+        @post.Id -
+        @post.Title
+    </p>
 }
+
+<nav>
+    <ul class="pager">
+        <li class="@(@Model.Previous == null ? "disabled" : null)">
+            <a asp-action="index" asp-route-previous="@Model.Previous" asp-route-first="@Model.First" asp-route-pageSize="@Model.PageSize">Previous</a>
+        </li>
+        <li class="@(@Model.Next == null ? "disabled" : null)">
+            <a asp-action="index" asp-route-next="@Model.Next" asp-route-first="@Model.First" asp-route-pageSize="@Model.PageSize">Next</a>
+        </li>
+    </ul>
+</nav>
