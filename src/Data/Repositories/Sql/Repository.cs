@@ -3,34 +3,34 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
-using NPress.Data.Models;
+using NPress.Core.Data;
 
 namespace NPress.Data.Repositories.Sql
 {
-    public class Repository<T> : IRepository<T> where T : IDataModel
+    public class Repository<T> : IRepository<T> where T : IDataObject
     {
-        private readonly string m_connectionString;
-        private readonly string m_tableName;
-
         public Repository(string connectionString, string tableName = null)
         {
-            m_connectionString = connectionString;
+            ConnectionString = connectionString;
 
             if(string.IsNullOrWhiteSpace(tableName))
             {
-                m_tableName = typeof(T).Name;
+                TableName = typeof(T).Name;
             }
             else
             {
-                m_tableName = tableName;
+                TableName = tableName;
             }
         }
 
+        protected string ConnectionString { get; private set; }
+        protected string TableName { get; private set; }
+
         public async Task<T> GetByIdAsync(string id)
         {
-            using(var connection = new SqlConnection(m_connectionString))
+            using(var connection = new SqlConnection(ConnectionString))
             {
-                var models = await connection.QueryAsync<T>($"SELECT * FROM [{m_tableName}] WHERE [Id] = '{id}';");
+                var models = await connection.QueryAsync<T>($"SELECT * FROM [{TableName}] WHERE [Id] = '{id}';");
                 return models.FirstOrDefault();
             }
         }
@@ -43,9 +43,9 @@ namespace NPress.Data.Repositories.Sql
 
             var sqlFields = string.Join(", ", propertyContainer.EscapedProperties);
             var sqlParameters = string.Join(", ", propertyContainer.ParameterizedProperties);
-            var sql = $"INSERT INTO [{m_tableName}] ([Id], {sqlFields}) VALUES(@Id, {sqlParameters});";
+            var sql = $"INSERT INTO [{TableName}] ([Id], {sqlFields}) VALUES(@Id, {sqlParameters});";
 
-            using(var connection = new SqlConnection(m_connectionString))
+            using(var connection = new SqlConnection(ConnectionString))
             {
                 await connection.ExecuteAsync(sql, model);
             }
@@ -56,9 +56,9 @@ namespace NPress.Data.Repositories.Sql
             var propertyContainer = ParseProperties(model);
 
             var sqlPairs = string.Join(", ", propertyContainer.PairedProperties);
-            var sql = $"UPDATE [{m_tableName}] SET {sqlPairs} WHERE [Id] = '{model.Id}';";
+            var sql = $"UPDATE [{TableName}] SET {sqlPairs} WHERE [Id] = '{model.Id}';";
 
-            using(var connection = new SqlConnection(m_connectionString))
+            using(var connection = new SqlConnection(ConnectionString))
             {
                 await connection.ExecuteAsync(sql, model);
             }
@@ -83,9 +83,9 @@ namespace NPress.Data.Repositories.Sql
 
         public async Task DeleteById(string id)
         {
-            using(var connection = new SqlConnection(m_connectionString))
+            using(var connection = new SqlConnection(ConnectionString))
             {
-                await connection.ExecuteAsync($"DELETE FROM [{m_tableName}] WHERE [Id] = '{id}';");
+                await connection.ExecuteAsync($"DELETE FROM [{TableName}] WHERE [Id] = '{id}';");
             }
         }
 

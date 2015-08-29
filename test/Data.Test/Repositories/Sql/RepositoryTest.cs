@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
-using NPress.Data.Models;
 using Xunit;
 using Dapper;
+using NPress.Core.Data;
 
 namespace NPress.Data.Test.Repositories.Sql
 {
@@ -17,7 +17,14 @@ namespace NPress.Data.Test.Repositories.Sql
         public async Task Create_Success()
         {
             var repository = new Data.Repositories.Sql.Repository<Post>(ConnectionString);
-            var post = new Post { Title = "Test title", UserId = "1", Content = "Test content." };
+            var post = new Post
+            {
+                Title = "Test title",
+                UserId = "1",
+                Content = "Test content.",
+                CreationDateTime = DateTime.UtcNow,
+                RevisionDateTime = DateTime.UtcNow
+            };
             await repository.CreateAsync(post);
 
             Assert.NotNull(post.Id);

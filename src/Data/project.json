@@ -1,12 +1,13 @@
 {
     "version": "1.0.0-*",
-    "description": "NPress.Data Class Library",
+    "description": "Data Class Library",
     "authors": [ "kyles" ],
     "tags": [ "" ],
     "projectUrl": "",
     "licenseUrl": "",
 
     "dependencies": {
+        "Core": "",
         "Dapper": "1.42.0",
         "MongoDB.Driver": "2.0.1"
     },
