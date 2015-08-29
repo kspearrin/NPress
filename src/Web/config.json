@@ -1,1 +1,11 @@
-{ }
+{
+    "globalSettings": {
+        "mongoDB": {
+            "connectionString": "",
+            "databaseName": "npress"
+        },
+        "sql": {
+            "connectionString": "Data Source=(localdb)\\ProjectsV12;Initial Catalog=Sql;Integrated Security=True;Pooling=False;Connect Timeout=30"
+        }
+    }
+}

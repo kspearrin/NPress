@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 using Dapper;
 using System.Text;
 using NPress.Core.Data;
+using NPress.Core;
 
 namespace NPress.Data.Repositories.Sql
 {
     public class PostRepository : Repository<Post>, IPostRepository
     {
+        public PostRepository(GlobalSettings settings)
+            : this(settings.Sql.ConnectionString)
+        { }
+
         public PostRepository(string connectionString)
             : base(connectionString)
         { }

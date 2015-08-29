@@ -4,7 +4,7 @@
     [UserId] VARCHAR(30) NOT NULL,
     [Title] NVARCHAR(255) NOT NULL,
     [Content] NVARCHAR(MAX) NOT NULL,
-    [CreationDateTime] DATETIMEOFFSET NOT NULL,
-    [RevisionDateTime] DATETIMEOFFSET NOT NULL, 
+    [CreationDateTime] DATETIME2 NOT NULL,
+    [RevisionDateTime] DATETIME2 NOT NULL, 
     CONSTRAINT [PK_Post] PRIMARY KEY CLUSTERED ([Id] DESC)
 )

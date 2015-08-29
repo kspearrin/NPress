@@ -1,0 +1,16 @@
+﻿@model NPress.Web.Areas.Admin.Models.NewPostViewModel
+@{
+    ViewData["Title"] = "New Post";
+}
+
+<form asp-action="new">
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" type="text" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Content"></label>
+        <textarea asp-for="Content" type="text" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>

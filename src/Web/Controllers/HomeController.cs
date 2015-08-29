@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
+using NPress.Core;
+using NPress.Data.Repositories;
 
 namespace NPress.Web.Controllers
 {
     public class HomeController : Controller
     {
+        public HomeController(IPostRepository g)
+        {
+
+        }
+
         public IActionResult Index()
         {
             return View();

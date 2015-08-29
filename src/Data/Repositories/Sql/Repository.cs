@@ -3,13 +3,18 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
+using NPress.Core;
 using NPress.Core.Data;
 
 namespace NPress.Data.Repositories.Sql
 {
     public class Repository<T> : IRepository<T> where T : IDataObject
     {
-        public Repository(string connectionString, string tableName = null)
+        public Repository(GlobalSettings settings, string tableName = null)
+            : this(settings.Sql.ConnectionString, tableName)
+        { }
+
+        public Repository(string connectionString = null, string tableName = null)
         {
             ConnectionString = connectionString;
 

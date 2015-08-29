@@ -11,7 +11,10 @@ using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using Microsoft.Framework.Logging.Console;
+using Microsoft.Framework.OptionsModel;
 using Microsoft.Framework.Runtime;
+using NPress.Core;
+using NPress.Data.Repositories;
 
 namespace NPress.Web
 {
@@ -30,6 +33,17 @@ namespace NPress.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<GlobalSettings>(Configuration.GetConfigurationSection("globalSettings"));
+
+            services.AddOptions();
+            var provider = services.BuildServiceProvider();
+            var globalSettings = provider.GetRequiredService<IOptions<GlobalSettings>>().Options;
+
+            services.AddSingleton(s => globalSettings);
+
+            // DI
+            services.AddSingleton<IPostRepository>(s => new Data.Repositories.Sql.PostRepository(globalSettings));
+
             services.AddMvc();
         }
 
