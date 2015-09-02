@@ -6,18 +6,26 @@
 @foreach(var post in Model.Posts)
 {
     <p>
-        @post.Id -
         @post.Title
     </p>
 }
 
-<nav>
-    <ul class="pager">
-        <li class="@(@Model.Previous == null ? "disabled" : null)">
-            <a asp-action="index" asp-route-previous="@Model.Previous" asp-route-first="@Model.First" asp-route-pageSize="@Model.PageSize">Previous</a>
-        </li>
-        <li class="@(@Model.Next == null ? "disabled" : null)">
-            <a asp-action="index" asp-route-next="@Model.Next" asp-route-first="@Model.First" asp-route-pageSize="@Model.PageSize">Next</a>
-        </li>
-    </ul>
-</nav>
+@if(Model.Posts.Count() > 0 || ViewContext.HttpContext.Request.Query["before"] != null)
+{
+    <nav>
+        <ul class="pager">
+            @if(ViewContext.HttpContext.Request.Query["before"] != null)
+            {
+                <li>
+                    <a href="javascript:history.back()">Previous</a>
+                </li>
+            }
+            @if(Model.Posts.Count() == Model.PageSize)
+            {
+                <li>
+                    <a asp-action="index" asp-route-before="@Model.Before" asp-route-pageSize="@Model.PageSize">Next</a>
+                </li>
+            }
+        </ul>
+    </nav>
+}

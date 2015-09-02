@@ -1,4 +1,4 @@
-﻿namespace NPress.Core.Data
+﻿namespace NPress.Core
 {
     public interface IDataObject
     {

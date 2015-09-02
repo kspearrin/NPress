@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using NPress.Core;
-using NPress.Data.Repositories;
+using NPress.Core.Repositories;
 
 namespace NPress.Web.Controllers
 {

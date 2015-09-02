@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NPress.Core.Data
+namespace NPress.Core.Domains
 {
     public class Post : IDataObject
     {
@@ -8,7 +8,7 @@ namespace NPress.Core.Data
         public string UserId { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        public DateTime CreationDateTime { get; set; }
-        public DateTime RevisionDateTime { get; set; }
+        public DateTime CreationDateTime { get; set; } = DateTime.UtcNow;
+        public DateTime RevisionDateTime { get; set; } = DateTime.UtcNow;
     }
 }

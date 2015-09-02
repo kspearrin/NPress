@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using NPress.Core.Data;
-using NPress.Data.Repositories;
+using NPress.Core.Domains;
+using NPress.Core.Repositories;
 
-namespace NPress.Business.Services
+namespace NPress.Core.Services
 {
     public class PostService : IPostService
     {
@@ -17,7 +17,7 @@ namespace NPress.Business.Services
             m_postRepository = postRepository;
         }
 
-        public async Task<IEnumerable<Post>> PagePostsAsync(string cursor, bool beforeCursor, int pageSize, bool directionNext)
+        public async Task<IEnumerable<Post>> PagePostsAsync(string cursor, bool beforeCursor, int pageSize)
         {
             if(pageSize > 100)
             {
@@ -25,18 +25,11 @@ namespace NPress.Business.Services
             }
 
             var posts = await m_postRepository.PageAsync(cursor, beforeCursor, pageSize);
-
-            if(!string.IsNullOrWhiteSpace(cursor) && !directionNext)
-            {
-                return posts.Reverse();
-            }
-
             return posts;
         }
 
         public async Task CreatePostAsync(Post post)
         {
-            post.CreationDateTime = post.RevisionDateTime = DateTime.UtcNow;
             await m_postRepository.CreateAsync(post);
         }
     }

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
-using NPress.Business.Services;
-using NPress.Data.Repositories;
+using NPress.Core.Domains;
+using NPress.Core.Services;
 using NPress.Web.Areas.Admin.Models;
 
 namespace NPress.Web.Areas.Admin.Controllers
@@ -20,19 +20,15 @@ namespace NPress.Web.Areas.Admin.Controllers
         }
 
         public async Task<IActionResult> Index(
-            string next = null,
-            string previous = null,
-            string first = null,
+            string before = null,
             int pageSize = 20)
         {
-            var posts = await m_postService.PagePostsAsync(next ?? previous, previous == null, pageSize, previous == null);
+            var posts = await m_postService.PagePostsAsync(before, true, pageSize);
             var model = new PostIndexViewModel
             {
-                Posts = posts,
+                Posts = PostViewModel.Build(posts),
                 PageSize = pageSize,
-                Next = posts.Count() == pageSize ? posts.LastOrDefault()?.Id : null,
-                Previous = first != posts.FirstOrDefault()?.Id && (next != null || previous != null) ? posts.FirstOrDefault()?.Id : null,
-                First = first ?? posts.FirstOrDefault()?.Id
+                Before = posts.Count() == pageSize ? posts.LastOrDefault()?.Id : null
             };
 
             return View(model);
@@ -46,7 +42,7 @@ namespace NPress.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> New(NewPostViewModel model)
         {
-            var post = new Core.Data.Post
+            var post = new Post
             {
                 Title = model.Title,
                 Content = model.Content,

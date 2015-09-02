@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
-using Xunit;
 using Dapper;
-using NPress.Core.Data;
+using NPress.Core.Domains;
+using Xunit;
 
-namespace NPress.Data.Test.Repositories.Sql
+namespace NPress.Core.Test.Repositories.Sql
 {
     public class RepositoryTest
     {
@@ -16,7 +16,7 @@ namespace NPress.Data.Test.Repositories.Sql
         [Fact]
         public async Task Create_Success()
         {
-            var repository = new Data.Repositories.Sql.PostRepository(ConnectionString);
+            var repository = new Core.Repositories.Sql.PostRepository(ConnectionString);
             var post = new Post
             {
                 Title = "Test title",
@@ -42,7 +42,7 @@ namespace NPress.Data.Test.Repositories.Sql
         [Fact]
         public async Task Page_CorrectOrder()
         {
-            var repository = new Data.Repositories.Sql.PostRepository(ConnectionString);
+            var repository = new Core.Repositories.Sql.PostRepository(ConnectionString);
             var posts = await repository.PageAsync(null, false, 2);
         }
     }

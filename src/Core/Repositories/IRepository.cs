@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
-using NPress.Core.Data;
 
-namespace NPress.Data.Repositories
+namespace NPress.Core.Repositories
 {
     public interface IRepository<T> where T : IDataObject
     {

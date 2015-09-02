@@ -4,10 +4,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
-using NPress.Core.Data;
-using NPress.Core;
+using NPress.Core.Domains;
 
-namespace NPress.Data.Repositories.Sql
+namespace NPress.Core.Repositories.Sql
 {
     public class PostRepository : Repository<Post>, IPostRepository
     {
