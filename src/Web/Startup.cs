@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Diagnostics;
 using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Routing;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
-using Microsoft.Framework.Logging.Console;
 using Microsoft.Framework.OptionsModel;
 using Microsoft.Framework.Runtime;
 using NPress.Core;
@@ -75,6 +72,9 @@ namespace NPress.Web
                 // send the request to the following path or controller action.
                 app.UseErrorHandler("/Home/Error");
             }
+
+            // Add localization to the request pipeline
+            app.UseRequestLocalization();
 
             // Add static files to the request pipeline.
             app.UseStaticFiles();
