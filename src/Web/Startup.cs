@@ -36,20 +36,23 @@ namespace NPress.Web
         {
             services.Configure<GlobalSettings>(Configuration.GetConfigurationSection("globalSettings"));
 
+            // Dependency Injection
+
+            // Options
             services.AddOptions();
+
+            // Settings
             var provider = services.BuildServiceProvider();
             var globalSettings = provider.GetRequiredService<IOptions<GlobalSettings>>().Options;
-
             services.AddSingleton(s => globalSettings);
 
-            // DI
-
-            // repositories
+            // Repositories
             services.AddSingleton<IPostRepository>(s => new Core.Repositories.Sql.PostRepository(globalSettings));
 
-            // services
+            // Services
             services.AddScoped<IPostService, PostService>();
 
+            // MVC
             services.AddMvc();
         }
 

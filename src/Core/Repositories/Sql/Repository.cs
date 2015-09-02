@@ -81,12 +81,12 @@ namespace NPress.Core.Repositories.Sql
             }
         }
 
-        public async Task Delete(T model)
+        public async Task DeleteAsync(T model)
         {
-            await DeleteById(model.Id);
+            await DeleteByIdAsync(model.Id);
         }
 
-        public async Task DeleteById(string id)
+        public async Task DeleteByIdAsync(string id)
         {
             var sql = $"DELETE FROM [{TableName}] WHERE [Id] = @Id;";
 
