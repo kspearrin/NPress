@@ -63,5 +63,7 @@
   <ItemGroup>
     <Build Include="Tables\Post.sql" />
     <Build Include="Tables\Page.sql" />
+    <Build Include="Tables\Blog.sql" />
+    <Build Include="Tables\User.sql" />
   </ItemGroup>
 </Project>

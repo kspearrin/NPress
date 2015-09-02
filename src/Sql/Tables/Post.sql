@@ -1,10 +1,10 @@
 ﻿CREATE TABLE [dbo].[Post]
 (
-    [Id] VARCHAR(30) NOT NULL, 
+    [Id] VARCHAR(30) NOT NULL,
     [UserId] VARCHAR(30) NOT NULL,
     [Title] NVARCHAR(255) NOT NULL,
     [Content] NVARCHAR(MAX) NOT NULL,
     [CreationDateTime] DATETIME2 NOT NULL,
-    [RevisionDateTime] DATETIME2 NOT NULL, 
+    [RevisionDateTime] DATETIME2 NOT NULL,
     CONSTRAINT [PK_Post] PRIMARY KEY CLUSTERED ([Id] DESC)
 )
