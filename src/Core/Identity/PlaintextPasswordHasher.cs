@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using NPress.Core.Domains;
 
-namespace CP.POS.Mvc.Identity
+namespace NPress.Core.Identity
 {
     public class PlaintextPasswordHasher : IPasswordHasher<User>
     {

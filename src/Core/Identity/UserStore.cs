@@ -135,27 +135,27 @@ namespace NPress.Core.Identity
 
         public Task AddToRoleAsync(User user, string roleName, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.FromResult<Object>(null);
         }
 
         public Task RemoveFromRoleAsync(User user, string roleName, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.FromResult<Object>(null);
         }
 
         public Task<IList<string>> GetRolesAsync(User user, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.FromResult<IList<string>>(new List<string>());
         }
 
         public Task<bool> IsInRoleAsync(User user, string roleName, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.FromResult<bool>(false);
         }
 
         public Task<IList<User>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.FromResult<IList<User>>(new List<User>());
         }
     }
 }

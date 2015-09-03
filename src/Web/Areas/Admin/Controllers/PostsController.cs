@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using NPress.Core.Domains;
 using NPress.Core.Services;
@@ -10,6 +11,8 @@ using NPress.Web.Areas.Admin.Models;
 namespace NPress.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Route("posts")]
+    [Authorize]
     public class PostsController : Controller
     {
         private readonly IPostService m_postService;
@@ -19,6 +22,7 @@ namespace NPress.Web.Areas.Admin.Controllers
             m_postService = postService;
         }
 
+        [Route("")]
         public async Task<IActionResult> Index(
             string before = null,
             int pageSize = 20)
@@ -34,12 +38,13 @@ namespace NPress.Web.Areas.Admin.Controllers
             return View(model);
         }
 
+        [Route("new")]
         public IActionResult New()
         {
             return View(new NewPostViewModel());
         }
 
-        [HttpPost]
+        [HttpPost("new")]
         public async Task<IActionResult> New(NewPostViewModel model)
         {
             var post = new Post

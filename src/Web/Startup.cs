@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
+using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Identity;
 using Microsoft.Dnx.Runtime;
 using Microsoft.Framework.Configuration;
@@ -36,8 +37,6 @@ namespace NPress.Web
         {
             services.Configure<GlobalSettings>(Configuration.GetSection("globalSettings"));
 
-            // Dependency Injection
-
             // Options
             services.AddOptions();
 
@@ -48,14 +47,28 @@ namespace NPress.Web
 
             // Repositories
             services.AddSingleton<IPostRepository>(s => new Core.Repositories.Sql.PostRepository(globalSettings));
+            services.AddSingleton<IUserRepository>(s => new Core.Repositories.Sql.UserRepository(globalSettings));
+            services.AddSingleton<IRoleRepository>(s => new Core.Repositories.Sql.RoleRepository(globalSettings));
 
             // Identity
             services.AddTransient<ILookupNormalizer, LowerInvariantLookupNormalizer>();
-            services.AddTransient<IPasswordHasher<User>, BCryptPasswordHasher>();
+            services.AddTransient<IPasswordHasher<User>, PlaintextPasswordHasher>();
             services.AddIdentity<User, Role>().AddUserStore<UserStore>().AddRoleStore<RoleStore>();
 
             // Services
             services.AddScoped<IPostService, PostService>();
+
+            // Auth
+            services.ConfigureCookieAuthentication(options =>
+            {
+                options.CookieName = "NPress";
+                options.ExpireTimeSpan = new TimeSpan(30, 0, 0, 0);
+                options.SlidingExpiration = true;
+                options.ReturnUrlParameter = "returnUrl";
+                options.LoginPath = options.LogoutPath = new PathString("/admin/login");
+                options.AccessDeniedPath = new PathString("/admin/login");
+                options.LogoutPath = new PathString("/admin/logout");
+            });
 
             // MVC
             services.AddMvc();
@@ -99,7 +112,7 @@ namespace NPress.Web
                         template: "{controller=Home}/{action=Index}/{id?}")
                     .MapRoute(
                         name: "adminArea",
-                        template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                        template: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
             });
         }
     }

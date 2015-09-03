@@ -1,0 +1,27 @@
+﻿@model NPress.Web.Areas.Admin.Models.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<form asp-antiforgery="true" method="post">
+    <div asp-validation-summary="ValidationSummary.All"></div>
+
+    <div>
+        <label asp-for="Username"></label>
+        <input asp-for="Username" />
+    </div>
+
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" />
+    </div>
+
+    <div>
+        <label asp-for="RememberMe">
+            Remember Me
+            <input asp-for="RememberMe" type="checkbox" />
+        </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Log in</button>
+</form>
