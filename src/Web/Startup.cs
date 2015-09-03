@@ -5,11 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
+using Microsoft.Dnx.Runtime;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using Microsoft.Framework.OptionsModel;
-using Microsoft.Framework.Runtime;
 using NPress.Core;
 using NPress.Core.Repositories;
 using NPress.Core.Services;
@@ -31,7 +31,7 @@ namespace NPress.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<GlobalSettings>(Configuration.GetConfigurationSection("globalSettings"));
+            services.Configure<GlobalSettings>(Configuration.GetSection("globalSettings"));
 
             // Dependency Injection
 
