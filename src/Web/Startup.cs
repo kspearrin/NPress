@@ -5,12 +5,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
+using Microsoft.AspNet.Identity;
 using Microsoft.Dnx.Runtime;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using Microsoft.Framework.OptionsModel;
 using NPress.Core;
+using NPress.Core.Domains;
+using NPress.Core.Identity;
 using NPress.Core.Repositories;
 using NPress.Core.Services;
 
@@ -27,7 +30,7 @@ namespace NPress.Web
             Configuration = builder.Build();
         }
 
-        public IConfiguration Configuration { get; set; }
+        public IConfiguration Configuration { get; private set; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -45,6 +48,11 @@ namespace NPress.Web
 
             // Repositories
             services.AddSingleton<IPostRepository>(s => new Core.Repositories.Sql.PostRepository(globalSettings));
+
+            // Identity
+            services.AddTransient<ILookupNormalizer, LowerInvariantLookupNormalizer>();
+            services.AddTransient<IPasswordHasher<User>, BCryptPasswordHasher>();
+            services.AddIdentity<User, Role>().AddUserStore<UserStore>().AddRoleStore<RoleStore>();
 
             // Services
             services.AddScoped<IPostService, PostService>();
@@ -73,11 +81,14 @@ namespace NPress.Web
                 app.UseErrorHandler("/Home/Error");
             }
 
-            // Add localization to the request pipeline
+            // Add localization to the request pipeline.
             app.UseRequestLocalization();
 
             // Add static files to the request pipeline.
             app.UseStaticFiles();
+
+            // Add identity to the request pipeline.
+            app.UseIdentity();
 
             // Add MVC to the request pipeline.
             app.UseMvc(routes =>

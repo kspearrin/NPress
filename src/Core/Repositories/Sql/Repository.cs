@@ -35,8 +35,8 @@ namespace NPress.Core.Repositories.Sql
 
             using(var connection = new SqlConnection(ConnectionString))
             {
-                var models = await connection.QueryAsync<T>(sql, new { Id = id });
-                return models.FirstOrDefault();
+                var objs = await connection.QueryAsync<T>(sql, new { Id = id });
+                return objs.FirstOrDefault();
             }
         }
 
@@ -69,21 +69,21 @@ namespace NPress.Core.Repositories.Sql
             }
         }
 
-        public async Task UpsertAsync(T model)
+        public async Task UpsertAsync(T obj)
         {
-            if(string.IsNullOrWhiteSpace(model.Id))
+            if(string.IsNullOrWhiteSpace(obj.Id))
             {
-                await CreateAsync(model);
+                await CreateAsync(obj);
             }
             else
             {
-                await ReplaceAsync(model);
+                await ReplaceAsync(obj);
             }
         }
 
-        public async Task DeleteAsync(T model)
+        public async Task DeleteAsync(T obj)
         {
-            await DeleteByIdAsync(model.Id);
+            await DeleteByIdAsync(obj.Id);
         }
 
         public async Task DeleteByIdAsync(string id)

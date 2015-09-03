@@ -10,11 +10,6 @@ namespace NPress.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController(IPostRepository g)
-        {
-
-        }
-
         public IActionResult Index()
         {
             return View();

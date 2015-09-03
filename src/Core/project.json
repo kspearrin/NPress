@@ -8,7 +8,9 @@
 
     "dependencies": {
         "Dapper": "1.42.0",
-        "MongoDB.Driver": "2.0.1"
+        "MongoDB.Driver": "2.0.1",
+        "Microsoft.AspNet.Identity": "3.0.0-beta7",
+        "BCrypt-Official": "0.1.109"
     },
 
     "frameworks": {
