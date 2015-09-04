@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace NPress.Core.Domains
 {
@@ -11,5 +12,7 @@ namespace NPress.Core.Domains
         public string DisplayName { get; set; }
         public DateTime CreationDateTime { get; set; } = DateTime.UtcNow;
         public DateTime RevisionDateTime { get; set; } = DateTime.UtcNow;
+
+        public ICollection<Role> Roles { get; set; } = new List<Role>();
     }
 }

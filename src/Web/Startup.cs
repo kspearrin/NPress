@@ -48,7 +48,7 @@ namespace NPress.Web
             // Repositories
             services.AddSingleton<IPostRepository>(s => new Core.Repositories.Sql.PostRepository(globalSettings));
             services.AddSingleton<IUserRepository>(s => new Core.Repositories.Sql.UserRepository(globalSettings));
-            services.AddSingleton<IRoleRepository>(s => new Core.Repositories.Sql.RoleRepository(globalSettings));
+            services.AddSingleton<IRoleRepository, Core.Repositories.Memory.RoleRepository>();
 
             // Identity
             services.AddTransient<ILookupNormalizer, LowerInvariantLookupNormalizer>();

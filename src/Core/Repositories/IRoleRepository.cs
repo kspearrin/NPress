@@ -4,8 +4,9 @@ using NPress.Core.Domains;
 
 namespace NPress.Core.Repositories
 {
-    public interface IRoleRepository : IRepository<Role>
+    public interface IRoleRepository
     {
-        Task<Role> GetByNormalizedNameAsync(string normalizedName);
+        Task<Role> GetByNameAsync(string name);
+        Task<IEnumerable<Role>> GetAllAsync();
     }
 }
