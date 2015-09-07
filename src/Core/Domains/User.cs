@@ -12,7 +12,6 @@ namespace NPress.Core.Domains
         public string DisplayName { get; set; }
         public DateTime CreationDateTime { get; set; } = DateTime.UtcNow;
         public DateTime RevisionDateTime { get; set; } = DateTime.UtcNow;
-
-        public ICollection<Role> Roles { get; set; } = new List<Role>();
+        public Enums.Role? Role { get; set; }
     }
 }

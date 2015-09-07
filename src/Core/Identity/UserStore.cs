@@ -16,12 +16,10 @@ namespace NPress.Core.Identity
         IUserRoleStore<User>
     {
         private readonly IUserRepository m_userRepository;
-        private readonly IRoleRepository m_roleRepository;
 
-        public UserStore(IUserRepository userRepository, IRoleRepository roleRepository)
+        public UserStore(IUserRepository userRepository)
         {
             m_userRepository = userRepository;
-            m_roleRepository = roleRepository;
         }
 
         public void Dispose() { }
@@ -137,41 +135,45 @@ namespace NPress.Core.Identity
 
         public async Task AddToRoleAsync(User user, string roleName, CancellationToken cancellationToken)
         {
-            var role = await m_roleRepository.GetByNameAsync(roleName);
-            if(role == null)
-            {
-                return;
-            }
-
-            user.Roles.Add(role);
+            user.Role = ParseRole(roleName);
             await m_userRepository.ReplaceAsync(user); // TODO: move to a service call with proper business logic checks
         }
 
         public async Task RemoveFromRoleAsync(User user, string roleName, CancellationToken cancellationToken)
         {
-            var role = await m_roleRepository.GetByNameAsync(roleName);
-            if(role == null)
+            if(user.Role != ParseRole(roleName))
             {
                 return;
             }
 
-            user.Roles.Remove(role);
+            user.Role = null;
             await m_userRepository.ReplaceAsync(user); // TODO: move to a service call with proper business logic checks
         }
 
         public Task<IList<string>> GetRolesAsync(User user, CancellationToken cancellationToken)
         {
-            return Task.FromResult<IList<string>>(user.Roles.Select(r => r.Name).ToList());
+            return Task.FromResult<IList<string>>(new List<string>() { user.Role.ToString() } );
         }
 
         public Task<bool> IsInRoleAsync(User user, string roleName, CancellationToken cancellationToken)
         {
-            return Task.FromResult(user.Roles.Any(r => r.Name == roleName));
+            return Task.FromResult(user.Role == ParseRole(roleName));
         }
 
         public Task<IList<User>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
         {
             return Task.FromResult<IList<User>>(new List<User>());
+        }
+
+        private Enums.Role ParseRole(string roleName)
+        {
+            Enums.Role role;
+            if(!Enum.TryParse(roleName, out role))
+            {
+                throw new ArgumentException(nameof(roleName));
+            }
+
+            return role;
         }
     }
 }
