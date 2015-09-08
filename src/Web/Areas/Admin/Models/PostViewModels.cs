@@ -13,12 +13,6 @@ namespace NPress.Web.Areas.Admin.Models
         public string Before { get; set; }
     }
 
-    public class NewPostViewModel
-    {
-        public string Title { get; set; }
-        public string Content { get; set; }
-    }
-
     public class PostViewModel
     {
         public PostViewModel() { }
@@ -27,10 +21,16 @@ namespace NPress.Web.Areas.Admin.Models
         {
             Title = post.Title;
             Content = post.Content;
+            Slug = post.Slug;
+            Published = post.Published;
+            PublishDateTime = post.PublishDateTime;
         }
 
         public string Title { get; set; }
         public string Content { get; set; }
+        public string Slug { get; set; }
+        public bool Published { get; set; } = true;
+        public DateTime PublishDateTime { get; set; } = DateTime.UtcNow;
 
         public static IEnumerable<PostViewModel> Build(IEnumerable<Post> posts)
         {

@@ -1,0 +1,30 @@
+﻿@model NPress.Web.Areas.Admin.Models.PostViewModel
+@{
+    ViewData["Title"] = "New Post";
+}
+
+<form asp-action="new">
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" type="text" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Slug"></label>
+        <input asp-for="Slug" type="text" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Content"></label>
+        <textarea asp-for="Content" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label>
+            <input asp-for="Published" type="checkbox" class="checkbox" />
+            @Html.DisplayNameFor(m => m.Published)
+        </label>
+    </div>
+    <div class="form-group">
+        <label asp-for="PublishDateTime"></label>
+        <input asp-for="PublishDateTime" type="text" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>

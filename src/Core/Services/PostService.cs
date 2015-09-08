@@ -17,6 +17,11 @@ namespace NPress.Core.Services
             m_postRepository = postRepository;
         }
 
+        public async Task<Post> GetPostByIdAsync(string id)
+        {
+            return await m_postRepository.GetByIdAsync(id);
+        }
+
         public async Task<IEnumerable<Post>> PagePostsAsync(string cursor, bool beforeCursor, int pageSize)
         {
             if(pageSize > 100)

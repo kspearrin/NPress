@@ -41,22 +41,55 @@ namespace NPress.Web.Areas.Admin.Controllers
         [Route("new")]
         public IActionResult New()
         {
-            return View(new NewPostViewModel());
+            return View("NewEdit", new PostViewModel());
         }
 
         [HttpPost("new")]
-        public async Task<IActionResult> New(NewPostViewModel model)
+        public async Task<IActionResult> New(PostViewModel model)
         {
             var post = new Post
             {
                 Title = model.Title,
                 Content = model.Content,
-                UserId = "1"
+                UserId = "1",
+                Slug = model.Slug,
+                Published = model.Published,
+                PublishDateTime = model.PublishDateTime
             };
 
             await m_postService.CreatePostAsync(post);
 
-            return View();
+            return View("NewEdit", new PostViewModel(post));
+        }
+
+        [Route("edit/{id}")]
+        public async Task<IActionResult> Edit(string id)
+        {
+            var post = await m_postService.GetPostByIdAsync(id);
+            if(post == null)
+            {
+                // TODO: not found
+            }
+
+            return View("NewEdit", new PostViewModel(post));
+        }
+
+        [HttpPost("edit/{id}")]
+        public async Task<IActionResult> Edit(string id, PostViewModel model)
+        {
+            var post = await m_postService.GetPostByIdAsync(id);
+            if( post == null )
+            {
+                // TODO: not found
+            }
+
+            post.Title = model.Title;
+            post.Content = model.Content;
+            post.Slug = model.Slug;
+            post.Published = model.Published;
+            post.PublishDateTime = model.PublishDateTime;
+
+            return View("NewEdit", new PostViewModel(post));
         }
     }
 }
