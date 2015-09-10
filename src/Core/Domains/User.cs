@@ -10,8 +10,8 @@ namespace NPress.Core.Domains
         public string Password { get; set; }
         public string Email { get; set; }
         public string DisplayName { get; set; }
+        public Enums.Role? Role { get; set; }
         public DateTime CreationDateTime { get; set; } = DateTime.UtcNow;
         public DateTime RevisionDateTime { get; set; } = DateTime.UtcNow;
-        public Enums.Role? Role { get; set; }
     }
 }

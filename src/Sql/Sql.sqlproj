@@ -65,6 +65,5 @@
     <Build Include="Tables\Page.sql" />
     <Build Include="Tables\Blog.sql" />
     <Build Include="Tables\User.sql" />
-    <Build Include="Tables\Role.sql" />
   </ItemGroup>
 </Project>
