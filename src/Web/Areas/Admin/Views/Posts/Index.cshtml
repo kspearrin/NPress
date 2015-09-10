@@ -10,20 +10,20 @@
     </p>
 }
 
-@if(Model.Posts.Count() > 0 || ViewContext.HttpContext.Request.Query["before"] != null)
+@if(Model.Posts.Count() > 0 || Model.Page > 1)
 {
     <nav>
         <ul class="pager">
-            @if(ViewContext.HttpContext.Request.Query["before"] != null)
+            @if(Model.Page > 1)
             {
                 <li>
-                    <a href="javascript:history.back()">Previous</a>
+                    <a asp-action="index" asp-route-cursor="@Model.Cursor" asp-route-page="@(Model.Page - 1)" asp-route-pageSize="@Model.PageSize">Previous</a>
                 </li>
             }
             @if(Model.Posts.Count() == Model.PageSize)
             {
                 <li>
-                    <a asp-action="index" asp-route-before="@Model.Before" asp-route-pageSize="@Model.PageSize">Next</a>
+                    <a asp-action="index" asp-route-cursor="@Model.Cursor" asp-route-page="@(Model.Page + 1)" asp-route-pageSize="@Model.PageSize">Next</a>
                 </li>
             }
         </ul>

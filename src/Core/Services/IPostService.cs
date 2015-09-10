@@ -8,7 +8,7 @@ namespace NPress.Core.Services
     {
         Task<Post> GetPostByIdAsync(string id);
         Task<Post> GetPostBySlugAsync(string slug);
-        Task<IEnumerable<Post>> PagePostsAsync(string cursor, bool beforeCursor, int pageSize);
+        Task<IEnumerable<Post>> PagePostsAsync(string cursor, int page, int pageSize, bool ascending);
         Task CreatePostAsync(Post post);
     }
 }

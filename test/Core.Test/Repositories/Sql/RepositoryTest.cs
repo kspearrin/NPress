@@ -43,7 +43,7 @@ namespace NPress.Core.Test.Repositories.Sql
         public async Task Page_CorrectOrder()
         {
             var repository = new Core.Repositories.Sql.PostRepository(ConnectionString);
-            var posts = await repository.PageAsync(null, false, 2);
+            var posts = await repository.PageAsync(null, 1, 2, true);
         }
     }
 }

@@ -7,6 +7,6 @@ namespace NPress.Core.Repositories
     public interface IPostRepository : IRepository<Post>
     {
         Task<Post> GetBySlugAsync(string slug);
-        Task<IEnumerable<Post>> PageAsync(string cursor, bool cursorBefore, int pageSize);
+        Task<IEnumerable<Post>> PageAsync(string cursor, int page, int pageSize, bool ascending);
     }
 }

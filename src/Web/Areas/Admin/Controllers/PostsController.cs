@@ -24,15 +24,17 @@ namespace NPress.Web.Areas.Admin.Controllers
 
         [Route("")]
         public async Task<IActionResult> Index(
-            string before = null,
+            string cursor = null,
+            int page = 1,
             int pageSize = 20)
         {
-            var posts = await m_postService.PagePostsAsync(before, true, pageSize);
+            var posts = await m_postService.PagePostsAsync(cursor, page, pageSize, false);
             var model = new PostIndexViewModel
             {
                 Posts = PostViewModel.Build(posts),
+                Page = page,
                 PageSize = pageSize,
-                Before = posts.Count() == pageSize ? posts.LastOrDefault()?.Id : null
+                Cursor = cursor ?? posts.FirstOrDefault()?.Id
             };
 
             return View(model);

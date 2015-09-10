@@ -9,8 +9,9 @@ namespace NPress.Web.Models
     public class PostIndexViewModel
     {
         public IEnumerable<PostViewModel> Posts { get; set; } = new List<PostViewModel>();
+        public string Cursor { get; set; }
+        public int Page { get; set; }
         public int PageSize { get; set; }
-        public string Before { get; set; }
     }
 
     public class PostViewModel

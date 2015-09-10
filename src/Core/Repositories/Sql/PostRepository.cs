@@ -29,13 +29,15 @@ namespace NPress.Core.Repositories.Sql
             }
         }
 
-        public async Task<IEnumerable<Post>> PageAsync(string cursor, bool beforeCursor, int pageSize)
+        public async Task<IEnumerable<Post>> PageAsync(string cursor, int page, int pageSize, bool ascending)
         {
+            var offset = page > 0 ? (page - 1) * pageSize : 0;
+
             var sql = $@"
                 SELECT * FROM [Post]
-                WHERE @Cursor IS NULL OR [Id] {(beforeCursor ? "<" : ">")} @Cursor
-                ORDER BY [Id] {(beforeCursor ? "DESC" : "ASC")}
-                OFFSET 0 ROWS
+                WHERE @Cursor IS NULL OR [Id] {(ascending ? ">=" : "<=")} @Cursor
+                ORDER BY [Id] {(ascending ? "ASC" : "DESC")}
+                OFFSET @Offset ROWS
                 FETCH NEXT @PageSize ROWS ONLY;";
 
             using(var connection = new SqlConnection(ConnectionString))
@@ -45,6 +47,7 @@ namespace NPress.Core.Repositories.Sql
                     new
                     {
                         Cursor = cursor,
+                        Offset = offset,
                         PageSize = pageSize
                     });
 
