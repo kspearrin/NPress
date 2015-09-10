@@ -1,0 +1,33 @@
+﻿@model NPress.Web.Models.PagedPostsViewModel
+@{
+    ViewData["Title"] = "Posts";
+}
+
+@foreach(var post in Model.Posts)
+{
+    <div class="blog-post">
+        <h2 class="blog-post-title">@post.Title</h2>
+        <p class="blog-post-meta">@post.PublishDateTime.ToString() by <a href="#">-----</a></p>
+        @post.Content
+    </div>
+}
+
+@if(Model.Posts.Count() > 0 || Model.Page > 1)
+{
+    <nav>
+        <ul class="pager">
+            @if(Model.Posts.Count() == Model.PageSize)
+            {
+                <li>
+                    <a asp-action="index" asp-controller="posts" asp-route-cursor="@Model.Cursor" asp-route-page="@(Model.Page + 1)" asp-route-pageSize="@Model.PageSize">Older Posts</a>
+                </li>
+            }
+            @if(Model.Page > 1)
+            {
+                <li>
+                    <a asp-action="index" asp-controller="posts" asp-route-cursor="@Model.Cursor" asp-route-page="@(Model.Page - 1)" asp-route-pageSize="@Model.PageSize">Newer Posts</a>
+                </li>
+            }
+        </ul>
+    </nav>
+}

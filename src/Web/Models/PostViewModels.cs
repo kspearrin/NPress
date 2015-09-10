@@ -6,7 +6,7 @@ using NPress.Core.Domains;
 
 namespace NPress.Web.Models
 {
-    public class PostIndexViewModel
+    public class PagedPostsViewModel
     {
         public IEnumerable<PostViewModel> Posts { get; set; } = new List<PostViewModel>();
         public string Cursor { get; set; }

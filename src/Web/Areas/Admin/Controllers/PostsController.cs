@@ -29,7 +29,7 @@ namespace NPress.Web.Areas.Admin.Controllers
             int pageSize = 20)
         {
             var posts = await m_postService.PagePostsAsync(cursor, page, pageSize, false);
-            var model = new PostIndexViewModel
+            var model = new PagedPostsViewModel
             {
                 Posts = PostViewModel.Build(posts),
                 Page = page,
