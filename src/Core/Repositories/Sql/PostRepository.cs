@@ -18,6 +18,17 @@ namespace NPress.Core.Repositories.Sql
             : base(connectionString)
         { }
 
+        public async Task<Post> GetBySlugAsync(string slug)
+        {
+            var sql = $"SELECT * FROM [Post] WHERE [Slug] = @Slug;";
+
+            using(var connection = new SqlConnection(ConnectionString))
+            {
+                var posts = await connection.QueryAsync<Post>(sql, new { Slug = slug });
+                return posts.FirstOrDefault();
+            }
+        }
+
         public async Task<IEnumerable<Post>> PageAsync(string cursor, bool beforeCursor, int pageSize)
         {
             var sql = $@"

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 using NPress.Core.Domains;
-using NPress.Web.Areas.Admin.Models;
+using NPress.Web.Models;
 
 namespace NPress.Web.Areas.Admin.Controllers
 {

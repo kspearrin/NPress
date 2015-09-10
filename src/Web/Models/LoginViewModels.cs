@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NPress.Web.Areas.Admin.Models
+namespace NPress.Web.Models
 {
     public class LoginViewModel
     {

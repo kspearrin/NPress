@@ -22,6 +22,11 @@ namespace NPress.Core.Services
             return await m_postRepository.GetByIdAsync(id);
         }
 
+        public async Task<Post> GetPostBySlugAsync(string slug)
+        {
+            return await m_postRepository.GetBySlugAsync(slug);
+        }
+
         public async Task<IEnumerable<Post>> PagePostsAsync(string cursor, bool beforeCursor, int pageSize)
         {
             if(pageSize > 100)

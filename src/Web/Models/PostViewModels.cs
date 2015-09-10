@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using NPress.Core.Domains;
 
-namespace NPress.Web.Areas.Admin.Models
+namespace NPress.Web.Models
 {
     public class PostIndexViewModel
     {
@@ -19,6 +19,12 @@ namespace NPress.Web.Areas.Admin.Models
 
         public PostViewModel(Post post)
         {
+            if(post == null)
+            {
+                throw new ArgumentNullException(nameof(post));
+            }
+
+            Id = post.Id;
             Title = post.Title;
             Content = post.Content;
             Slug = post.Slug;
@@ -26,6 +32,7 @@ namespace NPress.Web.Areas.Admin.Models
             PublishDateTime = post.PublishDateTime;
         }
 
+        public string Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
         public string Slug { get; set; }

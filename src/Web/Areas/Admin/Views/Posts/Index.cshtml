@@ -1,4 +1,4 @@
-﻿@model NPress.Web.Areas.Admin.Models.PostIndexViewModel
+﻿@model NPress.Web.Models.PostIndexViewModel
 @{
     ViewData["Title"] = "Posts";
 }
@@ -6,7 +6,7 @@
 @foreach(var post in Model.Posts)
 {
     <p>
-        @post.Title
+        @post.Title - <a asp-action="edit" asp-route-id="@post.Id">Edit</a>
     </p>
 }
 

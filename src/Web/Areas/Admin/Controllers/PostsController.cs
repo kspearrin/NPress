@@ -6,12 +6,12 @@ using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using NPress.Core.Domains;
 using NPress.Core.Services;
-using NPress.Web.Areas.Admin.Models;
+using NPress.Web.Models;
 
 namespace NPress.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Route("posts")]
+    [Route("~/admin/posts")]
     [Authorize]
     public class PostsController : Controller
     {
@@ -41,12 +41,16 @@ namespace NPress.Web.Areas.Admin.Controllers
         [Route("new")]
         public IActionResult New()
         {
+            ViewBag.Title = "New Post";
+
             return View("NewEdit", new PostViewModel());
         }
 
         [HttpPost("new")]
         public async Task<IActionResult> New(PostViewModel model)
         {
+            ViewBag.Title = "New Post";
+
             var post = new Post
             {
                 Title = model.Title,
@@ -71,6 +75,8 @@ namespace NPress.Web.Areas.Admin.Controllers
                 // TODO: not found
             }
 
+            ViewBag.Title = $"Edit {post.Title}";
+
             return View("NewEdit", new PostViewModel(post));
         }
 
@@ -78,10 +84,12 @@ namespace NPress.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(string id, PostViewModel model)
         {
             var post = await m_postService.GetPostByIdAsync(id);
-            if( post == null )
+            if(post == null)
             {
                 // TODO: not found
             }
+
+            ViewBag.Title = $"Edit {post.Title}";
 
             post.Title = model.Title;
             post.Content = model.Content;
