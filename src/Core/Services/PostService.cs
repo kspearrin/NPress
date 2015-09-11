@@ -64,6 +64,8 @@ namespace NPress.Core.Services
                 // TODO: Error
             }
 
+            post.RevisionDateTime = DateTime.UtcNow;
+
             await m_postRepository.ReplaceAsync(post);
         }
     }
