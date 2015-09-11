@@ -10,5 +10,6 @@ namespace NPress.Core.Services
         Task<Post> GetPostBySlugAsync(string slug);
         Task<IEnumerable<Post>> PagePostsAsync(string cursor, int page, int pageSize, bool ascending);
         Task CreatePostAsync(Post post);
+        Task UpdatePostAsync(Post post);
     }
 }

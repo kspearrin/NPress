@@ -7,10 +7,12 @@
     "licenseUrl": "",
 
     "dependencies": {
+        "Microsoft.AspNet.Mvc": "6.0.0-beta7",
         "Dapper": "1.42.0",
         "MongoDB.Driver": "2.0.1",
         "Microsoft.AspNet.Identity": "3.0.0-beta7",
-        "BCrypt-Official": "0.1.109"
+        "BCrypt-Official": "0.1.109",
+        "MarkdownDeep.NET": "1.5.0"
     },
 
     "frameworks": {

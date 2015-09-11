@@ -49,7 +49,22 @@ namespace NPress.Core.Services
 
         public async Task CreatePostAsync(Post post)
         {
+            if(!string.IsNullOrWhiteSpace(post.Id))
+            {
+                // TODO: Error
+            }
+
             await m_postRepository.CreateAsync(post);
+        }
+
+        public async Task UpdatePostAsync(Post post)
+        {
+            if(string.IsNullOrWhiteSpace(post.Id))
+            {
+                // TODO: Error
+            }
+
+            await m_postRepository.ReplaceAsync(post);
         }
     }
 }

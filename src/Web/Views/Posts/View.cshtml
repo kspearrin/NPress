@@ -6,5 +6,5 @@
 <div class="blog-post">
     <h2 class="blog-post-title">@Model.Title</h2>
     <p class="blog-post-meta">@Model.PublishDateTime.ToString() by <a href="#">-----</a></p>
-    @Model.Content
+    @Model.Content.ToHtmlContent()
 </div>

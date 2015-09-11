@@ -99,6 +99,8 @@ namespace NPress.Web.Areas.Admin.Controllers
             post.Published = model.Published;
             post.PublishDateTime = model.PublishDateTime;
 
+            await m_postService.UpdatePostAsync(post);
+
             return View("NewEdit", new PostViewModel(post));
         }
     }
