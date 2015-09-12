@@ -64,7 +64,7 @@ namespace NPress.Web
                 options.ExpireTimeSpan = new TimeSpan(30, 0, 0, 0);
                 options.SlidingExpiration = true;
                 options.ReturnUrlParameter = "returnUrl";
-                options.LoginPath = options.LogoutPath = new PathString("/admin/login");
+                options.LoginPath = new PathString("/admin/login");
                 options.AccessDeniedPath = new PathString("/admin/login");
                 options.LogoutPath = new PathString("/admin/logout");
             });

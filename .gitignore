@@ -200,3 +200,4 @@ project.lock.json
 *.min.js
 *.min.css
 src/*/wwwroot/lib/
+src/*/wwwroot/css/
