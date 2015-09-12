@@ -10,8 +10,31 @@
         <input asp-for="Slug" type="text" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="Content"></label>
-        <textarea asp-for="Content" class="form-control"></textarea>
+        <label asp-for="Content" class="sr-only"></label>
+        <div id="editor-buttons">
+            <div class="btn-group">
+                <button class="btn btn-link" data-command="bold" title="Bold (Ctrl+B)"><i class="fa fa-bold"></i></button>
+                <button class="btn btn-link" data-command="italic" title="Italic (Ctrl+I)"><i class="fa fa-italic"></i></button>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-link" data-command="link" title="Insert Hyperlink (Ctrl+L)"><i class="fa fa-link"></i></button>
+                <button class="btn btn-link" data-command="indent" title="Quote (Ctrl+Q)"><i class="fa fa-quote-left"></i></button>
+                <button class="btn btn-link" data-command="outdent" title="Unquote (Ctrl+W)"><i class="fa fa-outdent"></i></button>
+                <button class="btn btn-link" data-command="code" title="Preformatted Code (Ctrl+K or Tab/Shift+Tab on multiline selection)"><i class="fa fa-code"></i></button>
+                <button class="btn btn-link" data-command="img" title="Insert Image (Ctrl+G)"><i class="fa fa-photo"></i></button>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-link" data-command="ullist" title="Bullet List (Ctrl+U)"><i class="fa fa-list-ul"></i></button>
+                <button class="btn btn-link" data-command="ollist" title="Number List (Ctrl+O)"><i class="fa fa-list-ol"></i></button>
+                <button class="btn btn-link" data-command="heading" title="Change Heading Style (Ctrl+H, or Ctrl+0 to Ctrl+6)"><i class="fa fa-header"></i></button>
+                <button class="btn btn-link" data-command="hr" title="Insert Horizontal Rule (Ctrl+R)"><i class="fa fa-bold"></i></button>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-link" data-command="undo" title="Undo (Ctrl+Z)"><i class="fa fa-share fa-undo"></i></button>
+                <button class="btn btn-link" data-command="redo" title="Redo (Ctrl+Y)"><i class="fa fa-repeat"></i></button>
+            </div>
+        </div>
+        <textarea asp-for="Content" class="form-control" style="min-height: 400px; max-height: 1000px; font-family: Courier New, Courier, monospace; line-height: 16px;"></textarea>
     </div>
     <div class="checkbox">
         <label>
@@ -25,3 +48,27 @@
     </div>
     <button type="submit" class="btn btn-default">Submit</button>
 </form>
+
+<hr />
+
+<strong>Post Preview:</strong>
+<div id="preview"></div>
+
+@section scripts {
+    <environment names="Development">
+        <script src="~/js/MarkdownDeep.js"></script>
+        <script src="~/js/MarkdownDeepEditor.js"></script>
+    </environment>
+
+    <script>
+        var editor = new MarkdownDeepEditor.Editor(
+            document.getElementById("Content"),
+            document.getElementById("preview"),
+            null);
+
+        $("#editor-buttons button").click(function (e) {
+            e.preventDefault();
+            editor.InvokeCommand($(this).data("command"));
+        });
+    </script>
+}

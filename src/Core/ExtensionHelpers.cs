@@ -12,6 +12,7 @@ namespace NPress.Core
         {
             m_markdown = new Markdown();
             m_markdown.NewWindowForExternalLinks = true;
+            m_markdown.ExtraMode = true;
         }
 
         public static string ToHtml(this string markdownContent)
