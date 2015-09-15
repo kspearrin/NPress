@@ -3,6 +3,7 @@
 /// <reference path="js/blog.js" />
 /// <reference path="js/MarkdownDeep.js" />
 /// <reference path="js/markdowndeepeditor.js" />
+/// <reference path="lib/admin-lte/js/app.js" />
 /// <reference path="lib/bootstrap/js/bootstrap.js" />
 /// <reference path="lib/bootstrap/js/npm.js" />
 /// <reference path="lib/jquery/jquery.js" />

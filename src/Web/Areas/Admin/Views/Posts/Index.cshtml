@@ -3,29 +3,57 @@
     ViewData["Title"] = "Posts";
 }
 
-@foreach(var post in Model.Posts)
-{
-    <p>
-        @post.Title - <a asp-action="edit" asp-route-id="@post.Id">Edit</a>
-    </p>
+@section heading {
+    <h1>
+        Posts
+        <small>Your blog postsings</small>
+    </h1>
 }
 
-@if(Model.Posts.Count() > 0 || Model.Page > 1)
-{
-    <nav>
-        <ul class="pager">
-            @if(Model.Page > 1)
-            {
-                <li>
-                    <a asp-action="index" asp-route-cursor="@Model.Cursor" asp-route-page="@(Model.Page - 1)" asp-route-pageSize="@Model.PageSize">Previous</a>
-                </li>
-            }
-            @if(Model.Posts.Count() == Model.PageSize)
-            {
-                <li>
-                    <a asp-action="index" asp-route-cursor="@Model.Cursor" asp-route-page="@(Model.Page + 1)" asp-route-pageSize="@Model.PageSize">Next</a>
-                </li>
-            }
-        </ul>
-    </nav>
+@section breadcrumbs {
+    <ol class="breadcrumb">
+        <li><a asp-action="index" asp-controller="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="active">Posts</li>
+    </ol>
 }
+
+<div class="box">
+    <div class="box-body no-padding">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th style="width: 50px;"></th>
+                </tr>
+                </thead>
+            <tbody>
+                @foreach(var post in Model.Posts)
+                {
+                    <tr>
+                        <td>@post.Title</td>
+                        <td><a asp-action="edit" asp-route-id="@post.Id">Edit</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @if(Model.Posts.Count() == Model.PageSize || Model.Page > 1)
+    {
+        <div class="box-footer clearfix">
+            <ul class="pagination pagination-sm no-margin pull-right">
+                @if(Model.Page > 1)
+                {
+                    <li>
+                        <a asp-action="index" asp-route-cursor="@Model.Cursor" asp-route-page="@(Model.Page - 1)" asp-route-pageSize="@Model.PageSize">&laquo; Previous</a>
+                    </li>
+                }
+                @if(Model.Posts.Count() == Model.PageSize)
+                {
+                    <li>
+                        <a asp-action="index" asp-route-cursor="@Model.Cursor" asp-route-page="@(Model.Page + 1)" asp-route-pageSize="@Model.PageSize">Next &raquo;</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</div>

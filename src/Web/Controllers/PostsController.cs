@@ -41,7 +41,7 @@ namespace NPress.Web.Controllers
         public new async Task<IActionResult> View(string slug)
         {
             var post = await m_postService.GetPostBySlugAsync(slug);
-            if(post == null)
+            if(post == null || !post.Published || post.PublishDateTime < DateTime.UtcNow)
             {
                 // TODO: 404
             }

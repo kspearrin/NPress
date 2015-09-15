@@ -1,27 +1,40 @@
 ﻿@model NPress.Web.Models.LoginViewModel
 @{
+    Layout = "_FrontendLayout";
     ViewBag.Title = "Login";
+    ViewBag.BodyClass = "login-page";
 }
 
-<form asp-antiforgery="true" method="post">
-    <div asp-validation-summary="ValidationSummary.All"></div>
-
-    <div>
-        <label asp-for="Username"></label>
-        <input asp-for="Username" />
+<div class="login-box">
+    <div class="login-logo">
+        <a href="../../index2.html"><b>Admin</b>LTE</a>
     </div>
 
-    <div>
-        <label asp-for="Password"></label>
-        <input asp-for="Password" type="password" />
-    </div>
+    <div class="login-box-body">
+        <p class="login-box-msg">Log in to start your session</p>
+        <form asp-antiforgery="true" method="post">
+            <div class="form-group has-feedback">
+                <input asp-for="Username" type="text" class="form-control" placeholder="Username" />
+                <span class="fa fa-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input asp-for="Password" type="password" class="form-control" placeholder="Password" />
+                <span class="fa fa-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="checkbox">
+                        <label>
+                            <input asp-for="RememberMe" type="checkbox" /> Remember Me
+                        </label>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Log In</button>
+                </div>
+            </div>
+        </form>
 
-    <div>
-        <label asp-for="RememberMe">
-            Remember Me
-            <input asp-for="RememberMe" type="checkbox" />
-        </label>
+        <a href="#">I forgot my password</a>
     </div>
-
-    <button type="submit" class="btn btn-primary">Log in</button>
-</form>
+</div>

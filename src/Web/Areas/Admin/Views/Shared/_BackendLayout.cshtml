@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewData["Title"] | NPress Blog Admin</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
+              asp-fallback-test-class="hidden" asp-fallback-test-property="visibility" asp-fallback-test-value="hidden" />
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+              asp-fallback-href="~/lib/font-awesome/css/font-awesome.css"
+              asp-fallback-test-class="fa" asp-fallback-test-property="font-family" asp-fallback-test-value="FontAwesome" />
+        <link rel="stylesheet" href="~/css/admin.min.css" asp-append-version="true" />
+    </environment>
+
+    @RenderSection("head", required: false)
+</head>
+<body class="hold-transition skin-blue sidebar-mini layout-boxed">
+    <div class="wrapper">
+
+        <header class="main-header">
+            <a href="~/admin" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>A</b>LT</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>Admin</b>LTE</span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+            </nav>
+        </header>
+
+        <!-- Left side column. contains the sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+                    <li class="header">MAIN NAVIGATION</li>
+                    <li>
+                        <a asp-controller="dashboard" asp-action="index">
+                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="posts" asp-action="index">
+                            <i class="fa fa-map-pin"></i> <span>Posts</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                @RenderSection("heading", required: false)
+                @RenderSection("breadcrumbs", required: false)
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                @RenderBody()
+            </section>
+        </div>
+
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 0.0.0
+            </div>
+            <strong>Copyright &copy; @DateTime.Now.Year.</strong> All rights reserved.
+        </footer>
+
+    </div>
+
+    <environment names="Development">
+        <script src="~/lib/jquery/jquery.js"></script>
+        <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+        <script src="~/js/blog.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/jquery.min.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+        </script>
+        <script src="~/js/blog.min.js" asp-append-version="true"></script>
+    </environment>
+
+    <script src="~/lib/admin-lte/js/app.js"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

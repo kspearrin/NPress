@@ -1,58 +1,97 @@
 ﻿@model NPress.Web.Models.PostViewModel
+@{
+    var newPost = string.IsNullOrWhiteSpace(Model.Slug);
+}
 
-<form asp-antiforgery="true" asp-action="" method="post">
-    <div class="form-group">
-        <label asp-for="Title"></label>
-        <input asp-for="Title" type="text" class="form-control" />
+@section heading {
+    <h1>
+        @if(newPost)
+        {
+            @: New Post
+            <small>Create a new blog post</small>
+        }
+        else
+        {
+            @: Edit Post
+            <small>@Model.Title</small>
+        }
+    </h1>
+}
+
+@section breadcrumbs {
+    <ol class="breadcrumb">
+        <li><a asp-action="index" asp-controller="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li><a asp-action="index" asp-controller="posts">Posts</a></li>
+        <li class="active">@(newPost ? "New" : "Edit") Post</li>
+    </ol>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Posting</h3>
     </div>
-    <div class="form-group">
-        <label asp-for="Slug"></label>
-        <input asp-for="Slug" type="text" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Content" class="sr-only"></label>
-        <div id="editor-buttons">
-            <div class="btn-group">
-                <button class="btn btn-link" data-command="bold" title="Bold (Ctrl+B)"><i class="fa fa-bold"></i></button>
-                <button class="btn btn-link" data-command="italic" title="Italic (Ctrl+I)"><i class="fa fa-italic"></i></button>
+    <form asp-antiforgery="true" asp-action="" method="post" role="form">
+        <div class="box-body">
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" type="text" class="form-control" />
             </div>
-            <div class="btn-group">
-                <button class="btn btn-link" data-command="link" title="Insert Hyperlink (Ctrl+L)"><i class="fa fa-link"></i></button>
-                <button class="btn btn-link" data-command="indent" title="Quote (Ctrl+Q)"><i class="fa fa-quote-left"></i></button>
-                <button class="btn btn-link" data-command="outdent" title="Unquote (Ctrl+W)"><i class="fa fa-outdent"></i></button>
-                <button class="btn btn-link" data-command="code" title="Preformatted Code (Ctrl+K or Tab/Shift+Tab on multiline selection)"><i class="fa fa-code"></i></button>
-                <button class="btn btn-link" data-command="img" title="Insert Image (Ctrl+G)"><i class="fa fa-photo"></i></button>
+            <div class="form-group">
+                <label asp-for="Slug"></label>
+                <input asp-for="Slug" type="text" class="form-control" />
             </div>
-            <div class="btn-group">
-                <button class="btn btn-link" data-command="ullist" title="Bullet List (Ctrl+U)"><i class="fa fa-list-ul"></i></button>
-                <button class="btn btn-link" data-command="ollist" title="Number List (Ctrl+O)"><i class="fa fa-list-ol"></i></button>
-                <button class="btn btn-link" data-command="heading" title="Change Heading Style (Ctrl+H, or Ctrl+0 to Ctrl+6)"><i class="fa fa-header"></i></button>
-                <button class="btn btn-link" data-command="hr" title="Insert Horizontal Rule (Ctrl+R)"><i class="fa fa-bold"></i></button>
+            <div class="form-group">
+                <label asp-for="Content" class="sr-only"></label>
+                <div id="editor-buttons">
+                    <div class="btn-group">
+                        <button class="btn btn-default" data-command="bold" title="Bold (Ctrl+B)"><strong>Bold</strong></button>
+                        <button class="btn btn-default" data-command="italic" title="Italic (Ctrl+I)"><i>Italic</i></button>
+                        <button class="btn btn-default" data-command="heading" title="Change Heading Style (Ctrl+H, or Ctrl+0 to Ctrl+6)">Heading</button>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-default" data-command="indent" title="Quote (Ctrl+Q)"><i class="fa fa-quote-left"></i></button>
+                        <button class="btn btn-default" data-command="outdent" title="Unquote (Ctrl+W)"><i class="fa fa-outdent"></i></button>
+                        <button class="btn btn-default" data-command="ullist" title="Bullet List (Ctrl+U)"><i class="fa fa-list-ul"></i></button>
+                        <button class="btn btn-default" data-command="ollist" title="Number List (Ctrl+O)"><i class="fa fa-list-ol"></i></button>
+                        <button class="btn btn-default" data-command="code" title="Preformatted Code (Ctrl+K or Tab/Shift+Tab on multiline selection)"><i class="fa fa-code"></i></button>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-default" data-command="link" title="Insert Hyperlink (Ctrl+L)"><i class="fa fa-link"></i></button>
+                        <button class="btn btn-default" data-command="img" title="Insert Image (Ctrl+G)"><i class="fa fa-photo"></i></button>
+                        <button class="btn btn-default" data-command="hr" title="Insert Horizontal Rule (Ctrl+R)"><i class="fa fa-reorder"></i></button>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-default" data-command="undo" title="Undo (Ctrl+Z)"><i class="fa fa-share fa-undo"></i></button>
+                        <button class="btn btn-default" data-command="redo" title="Redo (Ctrl+Y)"><i class="fa fa-repeat"></i></button>
+                    </div>
+                </div>
+                <textarea asp-for="Content" class="form-control" style="min-height: 400px; max-height: 1000px; font-family: Courier New, Courier, monospace; line-height: 16px;"></textarea>
             </div>
-            <div class="btn-group">
-                <button class="btn btn-link" data-command="undo" title="Undo (Ctrl+Z)"><i class="fa fa-share fa-undo"></i></button>
-                <button class="btn btn-link" data-command="redo" title="Redo (Ctrl+Y)"><i class="fa fa-repeat"></i></button>
+            <div class="checkbox">
+                <label>
+                    <input asp-for="Published" type="checkbox" />
+                    @Html.DisplayNameFor(m => m.Published)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="PublishDateTime"></label>
+                <input asp-for="PublishDateTime" type="text" class="form-control" />
             </div>
         </div>
-        <textarea asp-for="Content" class="form-control" style="min-height: 400px; max-height: 1000px; font-family: Courier New, Courier, monospace; line-height: 16px;"></textarea>
-    </div>
-    <div class="checkbox">
-        <label>
-            <input asp-for="Published" type="checkbox" />
-            @Html.DisplayNameFor(m => m.Published)
-        </label>
-    </div>
-    <div class="form-group">
-        <label asp-for="PublishDateTime"></label>
-        <input asp-for="PublishDateTime" type="text" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-</form>
+        <div class="box-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
 
-<hr />
-
-<strong>Post Preview:</strong>
-<div id="preview"></div>
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Preview</h3>
+    </div>
+    <div class="box-body">
+        <div id="preview"></div>
+    </div>
+</div>
 
 @section scripts {
     <environment names="Development">

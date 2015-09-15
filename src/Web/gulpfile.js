@@ -62,6 +62,9 @@ gulp.task("lib", function () {
     // jquery-validation-unobtrusive
     gulp.src(paths.bowerDir + "jquery-validation-unobtrusive/*.js")
         .pipe(gulp.dest(paths.libDir + "jquery-validation-unobtrusive"));
+    // admin-lte
+    gulp.src(paths.bowerDir + "admin-lte/dist/js/app.js")
+        .pipe(gulp.dest(paths.libDir + "admin-lte/js"));
 });
 
 gulp.task("less", function () {
