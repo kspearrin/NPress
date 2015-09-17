@@ -27,7 +27,7 @@ namespace NPress.Web.Areas.Admin.Controllers
                 return RedirectToLocal(returnUrl);
             }
 
-            return View();
+            return View(new LoginViewModel { ReturnUrl = returnUrl });
         }
 
         [HttpPost("~/admin/login")]
@@ -47,7 +47,9 @@ namespace NPress.Web.Areas.Admin.Controllers
                 }
             }
 
-            return View();
+            model.ReturnUrl = returnUrl;
+
+            return View(model);
         }
 
         [Route("~/admin/logout")]

@@ -53,19 +53,22 @@ namespace NPress.Web.Areas.Admin.Controllers
         {
             ViewBag.Title = "New Post";
 
-            var post = new Post
+            if(ModelState.IsValid)
             {
-                Title = model.Title,
-                Content = model.Content,
-                UserId = "1",
-                Slug = model.Slug,
-                Published = model.Published,
-                PublishDateTime = model.PublishDateTime
-            };
+                var post = new Post
+                {
+                    Title = model.Title,
+                    Content = model.Content,
+                    UserId = "1",
+                    Slug = model.Slug,
+                    Published = model.Published,
+                    PublishDateTime = model.PublishDateTime
+                };
 
-            await m_postService.CreatePostAsync(post);
+                await m_postService.CreatePostAsync(post);
+            }
 
-            return View("NewEdit", new PostViewModel(post));
+            return View("NewEdit", model);
         }
 
         [Route("edit/{id}")]
@@ -93,15 +96,18 @@ namespace NPress.Web.Areas.Admin.Controllers
 
             ViewBag.Title = $"Edit {post.Title}";
 
-            post.Title = model.Title;
-            post.Content = model.Content;
-            post.Slug = model.Slug;
-            post.Published = model.Published;
-            post.PublishDateTime = model.PublishDateTime;
+            if(ModelState.IsValid)
+            {
+                post.Title = model.Title;
+                post.Content = model.Content;
+                post.Slug = model.Slug;
+                post.Published = model.Published;
+                post.PublishDateTime = model.PublishDateTime;
 
-            await m_postService.UpdatePostAsync(post);
+                await m_postService.UpdatePostAsync(post);
+            }
 
-            return View("NewEdit", new PostViewModel(post));
+            return View("NewEdit", model);
         }
     }
 }

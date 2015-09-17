@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using NPress.Core.Domains;
@@ -34,10 +35,15 @@ namespace NPress.Web.Models
         }
 
         public string Id { get; set; }
+        [Required]
         public string Title { get; set; }
+        [Required]
         public string Content { get; set; }
+        [Required]
         public string Slug { get; set; }
+        [Required]
         public bool Published { get; set; } = true;
+        [Required]
         public DateTime PublishDateTime { get; set; } = DateTime.UtcNow;
 
         public static IEnumerable<PostViewModel> Build(IEnumerable<Post> posts)

@@ -7,12 +7,12 @@
 
 <div class="login-box">
     <div class="login-logo">
-        <a href="../../index2.html"><b>Admin</b>LTE</a>
+        <a asp-controller="home" asp-action="index"><b>N</b>Press</a>
     </div>
 
     <div class="login-box-body">
         <p class="login-box-msg">Log in to start your session</p>
-        <form asp-antiforgery="true" method="post">
+        <form asp-antiforgery="true" asp-action="login" asp-controller="auth" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <div class="form-group has-feedback">
                 <input asp-for="Username" type="text" class="form-control" placeholder="Username" />
                 <span class="fa fa-user form-control-feedback"></span>
