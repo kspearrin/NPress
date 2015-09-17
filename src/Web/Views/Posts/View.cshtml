@@ -3,8 +3,4 @@
     ViewBag.Title = Model.Title;
 }
 
-<div class="blog-post">
-    <h2 class="blog-post-title">@Model.Title</h2>
-    <p class="blog-post-meta">@Model.PublishDateTime.ToString() by <a href="#">-----</a></p>
-    @Model.Content.ToHtmlContent()
-</div>
+@Html.Partial("~/Views/Posts/_Post", Model)

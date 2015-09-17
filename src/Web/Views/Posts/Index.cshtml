@@ -5,11 +5,7 @@
 
 @foreach(var post in Model.Posts)
 {
-    <div class="blog-post">
-        <h2 class="blog-post-title">@post.Title</h2>
-        <p class="blog-post-meta">@post.PublishDateTime.ToString() by <a href="#">-----</a></p>
-        @post.Content.ToHtmlContent()
-    </div>
+    @Html.Partial("~/Views/Posts/_Post", post)
 }
 
 @if(Model.Posts.Count() > 0 || Model.Page > 1)

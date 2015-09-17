@@ -1,0 +1,9 @@
+﻿@model NPress.Web.Models.PostViewModel
+
+<div class="blog-post">
+    <h2 class="blog-post-title">
+        <a asp-action="view" asp-controller="posts" asp-route-slug="@Model.Slug">@Model.Title</a>
+    </h2>
+    <p class="blog-post-meta">@Model.PublishDateTime.ToString() by <a href="#">-----</a></p>
+    @Model.Content.ToHtmlContent()
+</div>
