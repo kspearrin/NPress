@@ -48,6 +48,7 @@ namespace NPress.Web
             // Repositories
             services.AddSingleton<IPostRepository>(s => new Core.Repositories.Sql.PostRepository(globalSettings));
             services.AddSingleton<IUserRepository>(s => new Core.Repositories.Sql.UserRepository(globalSettings));
+            services.AddSingleton<IBlogRepository>(s => new Core.Repositories.Sql.BlogRepository(globalSettings));
 
             // Identity
             services.AddTransient<ILookupNormalizer, LowerInvariantLookupNormalizer>();
@@ -56,6 +57,8 @@ namespace NPress.Web
 
             // Services
             services.AddScoped<IPostService, PostService>();
+            services.AddScoped<IPageService, PageService>();
+            services.AddScoped<IBlogService, BlogService>();
 
             // Auth
             services.ConfigureCookieAuthentication(options =>

@@ -1,0 +1,36 @@
+﻿@model NPress.Web.Models.SettingsViewModel
+@{
+    ViewBag.Title = "Settings";
+}
+
+@section heading {
+    <h1>
+        Settings
+        <small>Configure your blog.</small>
+    </h1>
+}
+
+@section breadcrumbs {
+    <ol class="breadcrumb">
+        <li><a asp-action="index" asp-controller="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="active">Settings</li>
+    </ol>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">General</h3>
+    </div>
+    <form asp-antiforgery="true" asp-action="" method="post" role="form">
+        <div class="box-body">
+            <div asp-validation-summary="ValidationSummary.All" class="alert alert-danger"></div>
+            <div class="form-group">
+                <label asp-for="Blog.Title"></label>
+                <input asp-for="Blog.Title" type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="box-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
